@@ -50,13 +50,13 @@ public class RainDatabaseDbQueryManager {
      * @param location
      * @return
      */
-    public boolean isRainStatsEmptyForLocation(String location) {
+    public boolean isRainStatsEmptyForLocation(int location) {
         Cursor cursor = null;
         boolean isTableEmpty = false;
         try {
             cursor = getDatabase().query(RainDatabaseContract.RainStats.TABLE_NAME, null,
-                    RainDatabaseContract.RainStats.RAIN_LOCATION + " !=? ",
-                    new String[]{location}, null, null, null);
+                    RainDatabaseContract.RainStats.RAIN_LOCATION + " =? ",
+                    new String[]{String.valueOf(location)}, null, null, null);
             if (cursor != null && cursor.getCount() < 1) {
                 isTableEmpty = true;
             }
@@ -93,8 +93,8 @@ public class RainDatabaseDbQueryManager {
             for (WeatherResponse response : weatherResponses) {
                 sqlInsertStatement.clearBindings();
                 sqlInsertStatement.bindLong(1, location);
-                sqlInsertStatement.bindString(2, response.getMinRain());
-                sqlInsertStatement.bindString(3, response.getMaxRain());
+                sqlInsertStatement.bindString(2, !TextUtils.isEmpty(response.getMinRain()) ? response.getMinRain() : "NA");
+                sqlInsertStatement.bindString(3, !TextUtils.isEmpty(response.getMaxRain()) ? response.getMaxRain() : "NA");
                 sqlInsertStatement.bindString(4, String.valueOf(response.getValue()));
                 sqlInsertStatement.bindLong(5, response.getMonth());
                 sqlInsertStatement.bindLong(6, response.getYear());
@@ -117,10 +117,10 @@ public class RainDatabaseDbQueryManager {
      * @param location
      * @return
      */
-    public ArrayList<WeatherResponse> getRainStatsByLocation(String location) {
+    public ArrayList<WeatherResponse> getRainStatsByLocation(int location) {
         Cursor c = commonQuery(null,
-                RainDatabaseContract.RainStats.RAIN_LOCATION + " !=? ",
-                new String[]{location},
+                RainDatabaseContract.RainStats.RAIN_LOCATION + " =? ",
+                new String[]{String.valueOf(location)},
                 null);
         return returnCursorToList(c);
     }

@@ -2,8 +2,8 @@
     <string name="app_name">WeatherApplication</string>
     <string name="navigation_drawer_open">Open navigation drawer</string>
     <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_title">RainStatistics</string>
+    <string name="nav_header_subtitle">Android Assignment</string>
     <string name="nav_header_desc">Navigation header</string>
     <string name="server_url">https://s3.eu-west-2.amazonaws.com/interview-question-data/metoffice/</string>
     <string name="uk">UK Stats</string>

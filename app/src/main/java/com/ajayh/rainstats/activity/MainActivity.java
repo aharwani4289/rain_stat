@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity
 
         initComponents();
         executeWeatherApi(UK);
-        mToolbar.setTitle(getString(R.string.uk));
+        getSupportActionBar().setTitle(getString(R.string.uk));
     }
 
     private void initComponents() {
@@ -76,21 +76,31 @@ public class MainActivity extends AppCompatActivity
     private void executeWeatherApi(int loc) {
         mCurrentLocation = loc;
         handleProgressBarVisibility(View.VISIBLE);
-        WeatherApplication application = WeatherApplication.getInstance();
-        switch (loc) {
-            case UK:
-                application.getApiService().getWeatherForUK().enqueue(mCallback);
-                break;
-            case ENGLAND:
-                application.getApiService().getWeatherForEngland().enqueue(mCallback);
-                break;
-            case WALES:
-                application.getApiService().getWeatherForWales().enqueue(mCallback);
-                break;
-            case SCOTLAND:
-                application.getApiService().getWeatherForScotland().enqueue(mCallback);
-                break;
+        if (!RainDatabaseDbQueryManager.getInstance().isRainStatsEmptyForLocation(loc)) {
+            ArrayList<WeatherResponse> data = RainDatabaseDbQueryManager.getInstance().getRainStatsByLocation(loc);
+            handleProgressBarVisibility(View.GONE);
+            updateUI(data);
+        } else {
+            WeatherApplication application = WeatherApplication.getInstance();
+            switch (loc) {
+                case UK:
+                    getSupportActionBar().setTitle(getString(R.string.uk));
+                    application.getApiService().getWeatherForUK().enqueue(mCallback);
+                    break;
+                case ENGLAND:
+                    getSupportActionBar().setTitle(getString(R.string.england));
+                    application.getApiService().getWeatherForEngland().enqueue(mCallback);
+                    break;
+                case WALES:
+                    getSupportActionBar().setTitle(getString(R.string.wales));
+                    application.getApiService().getWeatherForWales().enqueue(mCallback);
+                    break;
+                case SCOTLAND:
+                    getSupportActionBar().setTitle(getString(R.string.scotland));
+                    application.getApiService().getWeatherForScotland().enqueue(mCallback);
+                    break;
 
+            }
         }
     }
 
@@ -123,11 +133,11 @@ public class MainActivity extends AppCompatActivity
     };
 
     private void updateDbAsynchronously(ArrayList<WeatherResponse> weatherResponses) {
-        new AsyncTask<Object, Void, Void>(){
+        new AsyncTask<Object, Void, Void>() {
 
             @Override
             protected Void doInBackground(Object... objects) {
-                RainDatabaseDbQueryManager.getInstance().saveRainStatsByLocation((int)objects[1], (ArrayList<WeatherResponse>)objects[0]);
+                RainDatabaseDbQueryManager.getInstance().saveRainStatsByLocation((int) objects[1], (ArrayList<WeatherResponse>) objects[0]);
                 return null;
             }
 
