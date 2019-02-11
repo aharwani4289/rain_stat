@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="16dp">
+
+    <RelativeLayout
+        android:id="@+id/rain_stat"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/rain_forecast_icon"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:src="@drawable/heavy_rain" />
+
+        <TextView
+            android:id="@+id/rain_in_mm_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/rain_forecast_icon"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:layout_toRightOf="@id/rain_stat">
+
+        <TableLayout
+            android:id="@+id/table"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp">
+
+            <TableRow
+                android:layout_width="wrap_content"
+
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/min_rain_in_mm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:singleLine="true"
+                    android:text="Min Rain" />
+
+                <TextView
+                    android:id="@+id/max_rain_in_mm"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:singleLine="true"
+                    android:text="Max Rain" />
+
+            </TableRow>
+
+            <TableRow
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/min_rain_in_mm_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:drawablePadding="5dp" />
+
+                <TextView
+                    android:id="@+id/max_rain_in_mm_value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@+id/min_rain_in_mm_value"
+                    android:drawablePadding="5dp" />
+
+            </TableRow>
+
+        </TableLayout>
+
+        <TextView
+            android:id="@+id/stats_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/table"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="16dp" />
+    </RelativeLayout>
+</RelativeLayout>

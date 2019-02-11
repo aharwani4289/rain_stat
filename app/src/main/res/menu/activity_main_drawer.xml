@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="navigation_view">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_uk"
+            android:icon="@drawable/flag"
+            android:title="UK" />
+        <item
+            android:id="@+id/nav_england"
+            android:icon="@drawable/flag"
+            android:title="England" />
+        <item
+            android:id="@+id/nav_wales"
+            android:icon="@drawable/flag"
+            android:title="Wales" />
+        <item
+            android:id="@+id/nav_scotland"
+            android:icon="@drawable/flag"
+            android:title="Scotland" />
+    </group>
+
+    <item android:title="Communicate">
+        <menu>
+            <item
+                android:id="@+id/nav_share"
+                android:icon="@drawable/ic_menu_share"
+                android:title="Share" />
+            <item
+                android:id="@+id/nav_contact"
+                android:icon="@drawable/email"
+                android:title="Contact US" />
+        </menu>
+    </item>
+
+</menu>
